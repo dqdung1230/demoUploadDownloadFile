@@ -31,9 +31,9 @@ export class AppComponent implements OnInit {
         alert('File Successfully Uploaded');
         // } else if {
         // kiểm tra nếu file đã có
-      } else
-        //thông báo
-        // alert('File Upload Fail');
+      }
+      //thông báo
+      // alert('File Upload Fail');
       {
         this.selectedFiles = undefined;
       }
