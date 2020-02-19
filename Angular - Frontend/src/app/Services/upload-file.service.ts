@@ -15,7 +15,7 @@ export class UploadFileService {
 
     data.append('file', file);
 
-    const newRequest = new HttpRequest('POST', environment.uploadApi, data, {
+    const newRequest = new HttpRequest('POST', environment.baseUrl + '/uploadFile', data, {
       reportProgress: true,
       responseType: 'text'
     });

@@ -27,8 +27,7 @@ export class AppComponent implements OnInit {
     this.resetForm();
     this.currentFileUpload = this.selectedFiles.item(0);
     this.uploadService.pushFileToStorage(this.currentFileUpload).subscribe(event => {
-      if (event.type === HttpEventType.UploadProgress) {
-      } else if (event instanceof HttpResponse) {
+      if (event instanceof HttpResponse) {
         alert('File Successfully Uploaded');
         // } else if {
         // kiểm tra nếu file đã có

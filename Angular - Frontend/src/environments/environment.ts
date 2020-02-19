@@ -4,8 +4,7 @@
 
 export const environment = {
   production: false,
-  downloadApi : 'http://localhost:8081/downloadFile/',
-  uploadApi: 'http://localhost:8081/uploadFile'
+  baseUrl: 'http://localhost:8081'
 };
 
 /*
