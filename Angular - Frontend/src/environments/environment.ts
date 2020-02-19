@@ -3,7 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  downloadApi : 'http://localhost:8081/downloadFile/',
+  uploadApi: 'http://localhost:8081/uploadFile'
 };
 
 /*

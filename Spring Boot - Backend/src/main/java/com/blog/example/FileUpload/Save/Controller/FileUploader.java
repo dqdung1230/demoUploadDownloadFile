@@ -1,6 +1,6 @@
 package com.blog.example.FileUpload.Save.Controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.blog.example.FileUpload.Save.Constant.FileConstant;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -8,11 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.websocket.server.PathParam;
 import java.io.*;
 import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,23 +17,15 @@ import java.util.List;
 @Controller
 public class FileUploader {
 
-    List<String> files = new ArrayList<String>();
-    private final Path uploadLocation = Paths.get("D:\\ProjectTest\\UploadFile\\FileUploaded\\");
-    private final Path downloadLocation = Paths.get("D:\\ProjectTest\\UploadFile\\FileDownloaded\\");
+    List<String> files = new ArrayList<>();
 
     @PostMapping("/uploadFile")
     public ResponseEntity<String> handleFileUpload(@RequestParam("file") MultipartFile file) {
-        String message;
+        String message= "Successfully uploaded!";
         try {
-            try {
-                String name = file.getOriginalFilename();
-                Files.copy(file.getInputStream(), this.uploadLocation.resolve(name));
-            } catch (Exception e) {
-                throw new RuntimeException("FAIL!");
-            }
+            String name = file.getOriginalFilename();
+            Files.copy(file.getInputStream(), FileConstant.uploadLocation.resolve(name));
             files.add(file.getOriginalFilename());
-
-            message = "Successfully uploaded!";
             return ResponseEntity.status(HttpStatus.OK).body(message);
         } catch (Exception e) {
             message = "Failed to upload!";
@@ -47,7 +36,7 @@ public class FileUploader {
     @GetMapping("/downloadFile/{filename}")
     public ResponseEntity<InputStreamResource> downloadFile(@PathVariable("filename") String filename) {
         try {
-            File file = new File(uploadLocation +  "/" + filename);
+            File file = new File(FileConstant.uploadLocation + "/" + filename);
             InputStreamResource resource = new InputStreamResource(new FileInputStream(file));
 
             return ResponseEntity.status(HttpStatus.OK).contentLength(file.length()).body(resource);
