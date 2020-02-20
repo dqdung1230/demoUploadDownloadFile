@@ -13,8 +13,9 @@ export class DownloadFileService {
   }
 
   downloadFile(filename: string, fileType: string): Observable<any> {
+    debugger;
     const fileExtension = fileType;
-    const url = `${environment.baseUrl} + '/downloadFile' + ${filename}`;
+    const url = `${environment.baseUrl}/downloadFile/${filename}`;
     return this.httpClient.get(url, {responseType: 'blob'}).pipe(map((res) => {
       const blob = new Blob([res], {type: fileExtension});
       return blob;
